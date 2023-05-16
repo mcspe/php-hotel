@@ -132,13 +132,13 @@
     const parking = document.getElementById('parking');
     const noParking = document.getElementById('noParking');
 
-    all.addEventListener('click', (e) => {
+    all.addEventListener('click', () => {
       form.submit();
     });
-    parking.addEventListener('click', (e) => {
+    parking.addEventListener('click', () => {
       form.submit();
     });
-    noParking.addEventListener('click', (e) => {
+    noParking.addEventListener('click', () => {
       form.submit();
     });
   </script>
