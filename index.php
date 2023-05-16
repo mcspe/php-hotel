@@ -75,26 +75,25 @@
 <body>
   <div class="container">
     <h1 class="text-center my-3">HOTEL</h1>
-    <form action="index.php" method="POST" class="d-flex justify-content-center align-items-center gap-3 my-5">
+    <form action="index.php" method="POST" class="d-flex justify-content-center align-items-center gap-3 my-5" id="radioForm">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="parkingRadios" id="all" value="all" checked>
+        <input class="form-check-input" type="radio" name="parkingRadios" id="all" value="all" <?php echo ((($filter === 'all') || ($filter === null)) ? 'checked' : '');?>>
         <label class="form-check-label" for="all">
           All
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="parkingRadios" id="parking" value="parking">
+        <input class="form-check-input" type="radio" name="parkingRadios" id="parking" value="parking" <?php echo (($filter === 'parking') ? 'checked' : '');?>>
         <label class="form-check-label" for="parking">
           With Parking
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="parkingRadios" id="noParking" value="noParking">
+        <input class="form-check-input" type="radio" name="parkingRadios" id="noParking" value="noParking" <?php echo (($filter === 'noParking') ? 'checked' : '');?>>
         <label class="form-check-label" for="noParking">
           Without Parking
         </label>
       </div>
-      <button type="submit" class="btn btn-dark">Filter</button>
     </form>
     <table class="table table-dark table-hover table-striped">
       <thead>
@@ -127,5 +126,21 @@
       </tbody>
     </table>
   </div>
+  <script>
+    const form = document.getElementById('radioForm');
+    const all = document.getElementById('all');
+    const parking = document.getElementById('parking');
+    const noParking = document.getElementById('noParking');
+
+    all.addEventListener('click', (e) => {
+      form.submit();
+    });
+    parking.addEventListener('click', (e) => {
+      form.submit();
+    });
+    noParking.addEventListener('click', (e) => {
+      form.submit();
+    });
+  </script>
 </body>
 </html>
