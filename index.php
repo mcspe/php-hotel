@@ -38,6 +38,7 @@
   ];
   $itemKeys = array_keys($hotels[0]);
   $filteredHotels = $hotels;
+  $filter = '';
   // var_dump($_POST);
   if ($_POST) {
     $filter = $_POST['parkingRadios'];
@@ -77,19 +78,19 @@
     <h1 class="text-center my-3">HOTEL</h1>
     <form action="index.php" method="POST" class="d-flex justify-content-center align-items-center gap-3 my-5" id="radioForm">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="parkingRadios" id="all" value="all" <?php echo ((($filter === 'all') || ($filter === null)) ? 'checked' : '');?>>
+        <input class="form-check-input" type="radio" name="parkingRadios" id="all" value="all" <?php echo ((($filter === 'all') || ($filter === '')) ? 'checked' : '')?>>
         <label class="form-check-label" for="all">
           All
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="parkingRadios" id="parking" value="parking" <?php echo (($filter === 'parking') ? 'checked' : '');?>>
+        <input class="form-check-input" type="radio" name="parkingRadios" id="parking" value="parking" <?php echo (($filter === 'parking') ? 'checked' : '')?>>
         <label class="form-check-label" for="parking">
           With Parking
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="parkingRadios" id="noParking" value="noParking" <?php echo (($filter === 'noParking') ? 'checked' : '');?>>
+        <input class="form-check-input" type="radio" name="parkingRadios" id="noParking" value="noParking" <?php echo (($filter === 'noParking') ? 'checked' : '')?>>
         <label class="form-check-label" for="noParking">
           Without Parking
         </label>
