@@ -37,6 +37,29 @@
     ]
   ];
   $itemKeys = array_keys($hotels[0]);
+  $filteredHotels = $hotels;
+  // var_dump($_POST);
+  if ($_POST) {
+    $filter = $_POST['parkingRadios'];
+    // var_dump($filter);
+    if ($filter === 'all') {
+      $filteredHotels = $hotels;
+    } elseif ($filter === 'parking') {
+      $filteredHotels = [];
+      foreach ($hotels as $hotel) {
+        if ($hotel['parking']) {
+          $filteredHotels[] = $hotel;
+        }
+      }
+    } elseif ($filter === 'noParking') {
+      $filteredHotels = [];
+      foreach ($hotels as $hotel) {
+        if (!$hotel['parking']) {
+          $filteredHotels[] = $hotel;
+        }
+      }
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +107,7 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($hotels as $hotel) :?>
+        <?php foreach ($filteredHotels as $hotel) :?>
           <tr role="button">
             <?php foreach ($hotel as $info) :?>
             <td scope="row">
