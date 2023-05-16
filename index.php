@@ -36,6 +36,7 @@
         'distance to center' => 50
     ]
   ];
+  $itemKeys = array_keys($hotels[0]);
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +45,64 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css' integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==' crossorigin='anonymous'/>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==' crossorigin='anonymous'/>
   <title>PHP Hotel</title>
 </head>
 <body>
-  <h1>HOTEL</h1>
-  <ul>
-    <?php foreach ($hotels as $hotel) : ?>
-      <li>
-        <ul>
-          <?php foreach ($hotel as $key => $value) {
-            echo "<li>
-              $key: $value
-            </li>";
-          } ?>
-        </ul>
-      </li>
-    <?php endforeach ?>
-  </ul>
+  <div class="container">
+    <h1 class="text-center my-3">HOTEL</h1>
+    <form action="index.php" method="POST" class="d-flex justify-content-center align-items-center gap-3 my-5">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="parkingRadios" id="all" value="all" checked>
+        <label class="form-check-label" for="all">
+          All
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="parkingRadios" id="parking" value="parking">
+        <label class="form-check-label" for="parking">
+          With Parking
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="parkingRadios" id="noParking" value="noParking">
+        <label class="form-check-label" for="noParking">
+          Without Parking
+        </label>
+      </div>
+      <button type="submit" class="btn btn-dark">Filter</button>
+    </form>
+    <table class="table table-dark table-hover table-striped">
+      <thead>
+        <tr>
+          <?php
+            foreach ($itemKeys as $key) {
+              echo '<th scope="col">' . ucfirst($key) . '</th>';
+            }
+          ?>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($hotels as $hotel) :?>
+          <tr role="button">
+            <?php foreach ($hotel as $info) :?>
+            <td scope="row">
+              <?php
+                if ($info === true) {
+                  echo '<i class="fa-solid fa-check"></i>';
+                } elseif ($info === false) {
+                  echo '<i class="fa-solid fa-xmark"></i>';
+                } else {
+                  echo $info;
+                }
+              ?>
+            </td>
+            <?php endforeach ?>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
